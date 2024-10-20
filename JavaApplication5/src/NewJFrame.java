@@ -22,19 +22,20 @@ public class NewJFrame extends javax.swing.JFrame {
     String FromLocation = "";
     String ToLocation = "";
     int randomnumber = 0;
-    
+    int Economy_rate = 5/100; //tax rate
+    int First_class_rate = 12/100; //tax rate
      int conversionRate = 83;
 
         // Data of the table (prices in USD * conversion rate to get INR)
          String[] destinations = {
-            "Dubai (DXB)", 
-            "London Heathrow (LHR)", 
-            "Goa (GOI)", 
-            "Mumbai (BOM)", 
-            "Kochi (COK)", 
-            "Colombo (CMB)", 
-            "Bangkok (BKK)", 
-            "Changi (SIN)"
+            "Dubai", 
+            "Heathrow", 
+            "Goa", 
+            "Mumbai", 
+            "Kochi", 
+            "Colombo", 
+            "Bangkok", 
+            "Changi"
         };
 
         // Randomly generated or realistic price range for each pair
@@ -53,6 +54,15 @@ public class NewJFrame extends javax.swing.JFrame {
         int numDestinations = destinations.length;
 
         // Prepare data for the table
+        /*
+         data table in organised
+        data[1] = {
+            [0] = From,
+            [1] = to,
+            [2] = price
+        }
+        */
+        
         Object[][] data = new Object[numDestinations * (numDestinations - 1)][3]; // All pairs except self-connections
         int rowIndex = 0;
 
@@ -541,6 +551,7 @@ public class NewJFrame extends javax.swing.JFrame {
         jLabel27.setAlignmentX(0.5F);
 
         jTextField23.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jTextField23.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField23.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField23jTextField12ActionPerformed(evt);
@@ -554,9 +565,11 @@ public class NewJFrame extends javax.swing.JFrame {
 
         jTextField24.setEditable(false);
         jTextField24.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jTextField24.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         jTextField25.setEditable(false);
         jTextField25.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jTextField25.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         jLabel29.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel29.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -726,12 +739,18 @@ public class NewJFrame extends javax.swing.JFrame {
         if (ToLocation != jComboBox1.getSelectedItem().toString()) {
             FromLocation = jComboBox1.getSelectedItem().toString();
         }
+        else if (FromLocation != "") {
+            jComboBox1.setSelectedItem(FromLocation);
+        }
         TicketInfo();
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
         if (FromLocation != jComboBox2.getSelectedItem().toString()) {
             ToLocation = jComboBox2.getSelectedItem().toString();
+        }
+        else if (ToLocation != "") {
+            jComboBox2.setSelectedItem(ToLocation);
         }
         TicketInfo();
 
@@ -820,14 +839,26 @@ public class NewJFrame extends javax.swing.JFrame {
         return random.nextInt(1234 , 6791);
     }
     
+    public void SetPriceForDestination(String from ,String to) {
+       System.out.println(from);
+       System.out.println(to);
+
+       for (int i = 0; i < data.length; i++) {
+            if (data[i][0] == from && data[i][1] == to) {
+                    // Convert prices from USD to INR
+                    jTextField1.setText("\u20B9 " +data[i][2].toString());
+                    break;
+            }
+        } 
+    }
+    
     public void TicketInfo(){
         System.out.println(Flight_Class);
         jTextField15.setText(Flight_Class);
         jTextField16.setText(ticket);
         jTextField20.setText(FromLocation);
         jTextField22.setText(ToLocation);
-        
-        
+
         if (randomnumber == 0) {
             randomnumber = getRandomNumber();
 
@@ -835,18 +866,22 @@ public class NewJFrame extends javax.swing.JFrame {
 
         }
         
-        if (jRadioButton2.isSelected()) {
+        if (jRadioButton2.isSelected() && Integer.parseInt(jSpinner1.getValue().toString()) > 0 ) {
+            
             jTextField17.setText(jSpinner1.getValue().toString());
         }else {
+            jSpinner1.setValue(1);
             jTextField17.setText("nil");
 
         }
-        if (jRadioButton7.isSelected()) {
+        if (jRadioButton7.isSelected() && Integer.parseInt(jSpinner2.getValue().toString()) > 0 ) {
             jTextField18.setText(jSpinner2.getValue().toString());
         }else {
+            jSpinner2.setValue(1);
             jTextField18.setText("nil");
 
         }
+        SetPriceForDestination(FromLocation , ToLocation);
 
     }
     /**
