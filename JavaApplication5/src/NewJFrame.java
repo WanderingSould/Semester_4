@@ -9,6 +9,9 @@
  * @author SCMS
  */
 import java.util.Random;
+import java.text.SimpleDateFormat;  
+import java.util.Date;  
+import java.sql.*;
 
 public class NewJFrame extends javax.swing.JFrame {
 
@@ -16,14 +19,17 @@ public class NewJFrame extends javax.swing.JFrame {
      * Creates new form NewJFrame
      */
     String Flight_Class = "Standard";
-    String ticket = "Single_Ticket";
+    String ticket = "Single Ticket";
     Boolean adultChecked = false;
     Boolean childChecked = false;
     String FromLocation = "";
     String ToLocation = "";
+    int adult_count = 1;
+    int Child_Count = 1;
     int randomnumber = 0;
-    int Economy_rate = 5/100; //tax rate
-    int First_class_rate = 12/100; //tax rate
+    int Economy_rate = 5; //tax rate
+    int First_class_rate = 12; //tax rate
+    int return_rate = 2;
      int conversionRate = 83;
 
         // Data of the table (prices in USD * conversion rate to get INR)
@@ -371,10 +377,10 @@ public class NewJFrame extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jRadioButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jRadioButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                                 .addGap(10, 10, 10))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
@@ -497,15 +503,19 @@ public class NewJFrame extends javax.swing.JFrame {
 
         jTextField15.setEditable(false);
         jTextField15.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jTextField15.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         jTextField16.setEditable(false);
         jTextField16.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jTextField16.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         jTextField17.setEditable(false);
         jTextField17.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jTextField17.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         jTextField18.setEditable(false);
         jTextField18.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jTextField18.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         jSeparator9.setForeground(new java.awt.Color(49, 104, 113));
 
@@ -840,16 +850,67 @@ public class NewJFrame extends javax.swing.JFrame {
     }
     
     public void SetPriceForDestination(String from ,String to) {
-       System.out.println(from);
-       System.out.println(to);
-
-       for (int i = 0; i < data.length; i++) {
+       float price = 0;
+       float tax = 0;
+        for (int i = 0; i < data.length; i++) {
             if (data[i][0] == from && data[i][1] == to) {
                     // Convert prices from USD to INR
-                    jTextField1.setText("\u20B9 " +data[i][2].toString());
+                    price = Integer.parseInt(data[i][2].toString());
                     break;
             }
         } 
+        if (price != 0) {
+            
+            
+            float child_Price = childChecked ? Child_Count * (price/2) : 0;
+            float adult_price = adultChecked ? adult_count * price : 0;
+            
+            price = child_Price + adult_price;
+            
+            if (ticket == "Return Ticket") {
+                price += (price *2) - ((price*return_rate)/100);
+            }
+            
+            if (Flight_Class == "First Class") {
+                tax =  (price * First_class_rate)/100;
+            }
+            else {
+                tax =  (price * Economy_rate)/100;
+            }
+        }
+        
+        jTextField1.setText("\u20B9 " +price);
+        jTextField2.setText("\u20B9 " + tax);
+        jTextField3.setText("\u20B9 " +( price + tax ));
+        jTextField24.setText("\u20B9 " +( price + tax ));
+
+    }
+    
+    public void SetSpinnerCount() {
+        if (randomnumber == 0) {
+            randomnumber = getRandomNumber();
+
+            jTextField25.setText(String.valueOf(randomnumber));
+
+        }
+        
+        if (jRadioButton2.isSelected() && Integer.parseInt(jSpinner1.getValue().toString()) > 0 ) {
+            adult_count = Integer.parseInt(jSpinner1.getValue().toString());
+            jTextField17.setText(jSpinner1.getValue().toString());
+        }else {
+            jSpinner1.setValue(1);
+            jTextField17.setText("nil");
+
+        }
+        if (jRadioButton7.isSelected() && Integer.parseInt(jSpinner2.getValue().toString()) > 0 ) {
+            Child_Count = Integer.parseInt(jSpinner2.getValue().toString());
+
+            jTextField18.setText(jSpinner2.getValue().toString());
+        }else {
+            jSpinner2.setValue(1);
+            jTextField18.setText("nil");
+
+        }
     }
     
     public void TicketInfo(){
@@ -859,30 +920,19 @@ public class NewJFrame extends javax.swing.JFrame {
         jTextField20.setText(FromLocation);
         jTextField22.setText(ToLocation);
 
-        if (randomnumber == 0) {
-            randomnumber = getRandomNumber();
-
-            jTextField25.setText(String.valueOf(randomnumber));
-
-        }
-        
-        if (jRadioButton2.isSelected() && Integer.parseInt(jSpinner1.getValue().toString()) > 0 ) {
-            
-            jTextField17.setText(jSpinner1.getValue().toString());
-        }else {
-            jSpinner1.setValue(1);
-            jTextField17.setText("nil");
-
-        }
-        if (jRadioButton7.isSelected() && Integer.parseInt(jSpinner2.getValue().toString()) > 0 ) {
-            jTextField18.setText(jSpinner2.getValue().toString());
-        }else {
-            jSpinner2.setValue(1);
-            jTextField18.setText("nil");
-
-        }
+        SetSpinnerCount();
         SetPriceForDestination(FromLocation , ToLocation);
+        
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
+        Date date = new Date();  
+        String info =formatter.format(date);
+        String[] info2 = info.split(" ");
+        
+        jTextField19.setText(info2[0]);
+        jTextField21.setText(info2[1]);
 
+        
+        
     }
     /**
      * @param args the command line arguments
