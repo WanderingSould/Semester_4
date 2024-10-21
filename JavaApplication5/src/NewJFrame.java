@@ -837,7 +837,11 @@ public class NewJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jSpinner2StateChanged
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+
+        NewJFrame nj = new NewJFrame();
+        
+        nj.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
