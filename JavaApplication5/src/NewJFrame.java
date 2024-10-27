@@ -108,10 +108,10 @@ public class NewJFrame extends javax.swing.JFrame {
         jRadioButton7 = new javax.swing.JRadioButton();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBox1 = new javax.swing.JComboBox<String>();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        jComboBox2 = new javax.swing.JComboBox<String>();
         jLabel4 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
@@ -260,7 +260,7 @@ public class NewJFrame extends javax.swing.JFrame {
         jSeparator2.setForeground(new java.awt.Color(49, 104, 113));
 
         jComboBox1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dubai", "Heathrow", "Goa", "Kochi", "Mumbai", "Colombo", "Bangkok", "Changi" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Dubai", "Heathrow", "Goa", "Kochi", "Mumbai", "Colombo", "Bangkok", "Changi" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
@@ -276,7 +276,7 @@ public class NewJFrame extends javax.swing.JFrame {
         jLabel8.setToolTipText("");
 
         jComboBox2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Kochi", "Goa", "Dubai", "Bangkok", "Changi", "Colombo", "Mumbai", "Heathrow" }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Kochi", "Goa", "Dubai", "Bangkok", "Changi", "Colombo", "Mumbai", "Heathrow" }));
         jComboBox2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox2ActionPerformed(evt);
@@ -342,7 +342,8 @@ public class NewJFrame extends javax.swing.JFrame {
 
         jButton3.setBackground(new java.awt.Color(127, 231, 220));
         jButton3.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        jButton3.setText("Submit");
+        jButton3.setText("Confirm");
+        jButton3.setToolTipText("");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -351,7 +352,7 @@ public class NewJFrame extends javax.swing.JFrame {
 
         jButton5.setBackground(new java.awt.Color(127, 231, 220));
         jButton5.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        jButton5.setText("Display");
+        jButton5.setText("My Bookings");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -370,7 +371,7 @@ public class NewJFrame extends javax.swing.JFrame {
                             .addComponent(jRadioButton3)
                             .addComponent(jRadioButton1)
                             .addComponent(jRadioButton6))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel7)
@@ -380,13 +381,13 @@ public class NewJFrame extends javax.swing.JFrame {
                                 .addComponent(jLabel8)
                                 .addGap(18, 18, 18)
                                 .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 36, Short.MAX_VALUE))
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(37, 37, 37)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jRadioButton4)
                                     .addComponent(jRadioButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jRadioButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jRadioButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -420,17 +421,17 @@ public class NewJFrame extends javax.swing.JFrame {
                             .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 180, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(42, 42, 42)
+                        .addContainerGap()
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(29, 29, 29)
                         .addComponent(jButton4)
                         .addGap(38, 38, 38)
                         .addComponent(jButton2)
-                        .addGap(32, 32, 32)))
+                        .addGap(13, 13, 13)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -612,9 +613,8 @@ public class NewJFrame extends javax.swing.JFrame {
                 .addComponent(jSeparator12, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel28, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel29, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel28, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel29, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jTextField25, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
                     .addComponent(jTextField24))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -769,7 +769,7 @@ public class NewJFrame extends javax.swing.JFrame {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection(
-            "jdbc:mysql://localhost:3306/airline" , "root" , "");
+            "jdbc:mysql://localhost:3306/airline" , "root" , "windows");
             
             Statement stmt = con.createStatement();
             String sql = "insert into air values ("+ randomnumber +" , ' " + Flight_Class + " ' , ' " + FromLocation + " ' , ' " + ToLocation + " ' , ' " + ticket + " ' , "+ price +" , "+ Child_Count +" , "+ adult_count +"  )";
@@ -867,7 +867,7 @@ public class NewJFrame extends javax.swing.JFrame {
         }
         
         Random random = new Random();
-        return random.nextInt(1234 , 6791);
+        return random.nextInt(1234);
     }
     
     public void SetPriceForDestination(String from ,String to) {

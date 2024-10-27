@@ -106,7 +106,7 @@ public class DisplayBox extends javax.swing.JFrame {
         
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/airline" , "root" , "");
+                    "jdbc:mysql://localhost:3306/airline" , "root" , "windows");
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery("select * from air");
             
